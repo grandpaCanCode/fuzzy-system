@@ -1,5 +1,5 @@
 
 <h1>Simple Pokemon App</h1>
 <br>All data obtained from:</br>
-<a href="https://pokeapi.co">![image](https://github.com/grandpaCanCode/fuzzy-system/assets/128002915/f3dd2540-a572-4d66-955c-48239bca7282)</a>
+<a href="https://pokeapi.co">[image](https://github.com/grandpaCanCode/fuzzy-system/assets/128002915/36cc0cda-2876-4960-9b00-6202bb6cc6ff)</a>
 
