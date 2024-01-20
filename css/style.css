@@ -1,0 +1,29 @@
+/******************************************
+/* CSS
+/*******************************************/
+
+
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+.container{
+  display: flex;
+  gap: 25px;
+  /* height: 100vh; */
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  align-content: space-between;
+ 
+}
+
+ul{
+  list-style: none;
+
+}
+
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
