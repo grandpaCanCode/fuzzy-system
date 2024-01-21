@@ -9,7 +9,7 @@
 /*******************************************/
 .container{
   display: flex;
-  gap: 25px;
+  gap: 10px;
   /* height: 100vh; */
   justify-content: center;
   align-items: center;
