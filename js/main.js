@@ -20,7 +20,7 @@ function getFetch(){
         if(notSureWhatIamDoingYet.undecidedPurpose){
           decision = 'blah blah blah'
         }else {
-          decision = `This Pokemon has these types:${notSureWhatIamDoingYet.typeList} ${notSureWhatIamDoingYet.reason.join(' and ')}.`
+          decision = `${notSureWhatIamDoingYet.name} has these types:${notSureWhatIamDoingYet.typeList} ${notSureWhatIamDoingYet.reason.join(' and ')}.`
         }
         document.querySelector('h2').innerText = decision
         document.querySelector('img').src = notSureWhatIamDoingYet.image
@@ -64,19 +64,18 @@ class Poke {
 
   isItUndecided() {
     let badTypes = ['fire', 'electric', 'fighting', 'poison', 'ghost']
-    if (this.weightToPounds(this.weight) > 400)
-    {
-      this.reason.push(`it is too heavy at 
+    if (badTypes.some(r=> this.typeList.indexOf(r) >= 0)){
+      this.reason.push(`. Those types are too dangerous.`)
+      this.undecidedPurpose = false
+    }
+    if (this.weightToPounds(this.weight) > 400){
+      this.reason.push(`${this.name} is too heavy at 
         ${this.weightToPounds(this.weight)} pounds`)
         this.undecidedPurpose = false
     }
     if (this.heightToFeet(this.height) > 7) {
-      this.reason.push(`it is too tall at 
+      this.reason.push(`${this.name} is too tall at 
       ${this.heightToFeet(this.height)} feet`)
-      this.undecidedPurpose = false
-    }
-    if (badTypes.some(r=> this.typeList.indexOf(r) >= 0)){
-      this.reason.push(`${this.name} type is too dangerous`)
       this.undecidedPurpose = false
     }
   }
