@@ -13,14 +13,20 @@ function getFetch(){
       .then(data => {
         console.log(data)
         //code I need to change
-        const notSureWhatIamDoingYet = new Poke (data.name, data.height, data.weight, data.types, data.sprites.other['official-artwork'].front_default)
+        const notSureWhatIamDoingYet = new Poke (data.name, data.abilities, data.height, data.weight, data.types, data.sprites.other['official-artwork'].front_default)
         notSureWhatIamDoingYet.getTypes()
         notSureWhatIamDoingYet.isItUndecided()
+        notSureWhatIamDoingYet.getAbilities()
         let decision = ''
         if(notSureWhatIamDoingYet.undecidedPurpose){
-          decision = 'blah blah blah'
+          decision = `${notSureWhatIamDoingYet.name} 
+                      has these types:${notSureWhatIamDoingYet.typeList}
+                      and these abilities: ${notSureWhatIamDoingYet.abilitiesList}`
         }else {
-          decision = `${notSureWhatIamDoingYet.name} has these types:${notSureWhatIamDoingYet.typeList} ${notSureWhatIamDoingYet.reason.join(' and ')}.`
+          decision = `${notSureWhatIamDoingYet.name} has these types:
+                      ${notSureWhatIamDoingYet.typeList} 
+                      and these abilities: ${notSureWhatIamDoingYet.abilitiesList}
+                      ${notSureWhatIamDoingYet.reason.join(' and ')}.`
         }
         document.querySelector('h2').innerText = decision
         document.querySelector('img').src = notSureWhatIamDoingYet.image
@@ -36,8 +42,9 @@ function getFetch(){
 }
         
 class Poke {
-    constructor(name, height, weight, types, image){
+    constructor(name, abilities, height, weight, types, image){
       this.name = name
+      this.abilities = abilities
       this.height = height
       this.types = types
       this.image = image
@@ -45,6 +52,7 @@ class Poke {
       this.undecidedPurpose = true
       this.reason = []
       this.typeList = []
+      this.abilitiesList = []
     }
 
   getTypes(){
@@ -52,6 +60,13 @@ class Poke {
           this.typeList.push(property.type.name)
       }
     console.log(this.typeList)
+  }
+
+  getAbilities(){
+    for(const property of this.abilities){
+      this.abilitiesList.push(property.ability.name)
+    }
+    console.log(this.abilitiesList)
   }
 
   weightToPounds(bacon){
