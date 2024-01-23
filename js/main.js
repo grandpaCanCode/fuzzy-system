@@ -11,28 +11,26 @@ function getFetch(){
       .then(data => {
         console.log(data)
         //code I need to change
-        const notSureWhatIamDoingYet = new Poke (data.name, data.abilities, data.height, data.weight, data.types, data.sprites.other['official-artwork'].front_default)
+        const notSureWhatIamDoingYet = new PokeInfo (data.name, data.abilities, data.height, data.weight, data.types, data.sprites.other['official-artwork'].front_default, data.location_area_encounters)
         notSureWhatIamDoingYet.getTypes()
         notSureWhatIamDoingYet.isItUndecided()
         notSureWhatIamDoingYet.getAbilities()
+        notSureWhatIamDoingYet.encounterInfo()
         let decision = ''
         if(notSureWhatIamDoingYet.undecidedPurpose){
           decision = `${notSureWhatIamDoingYet.name} 
-                      has these types:${notSureWhatIamDoingYet.typeList}
-                      and these abilities: ${notSureWhatIamDoingYet.abilitiesList}`
+                      has these types: ${notSureWhatIamDoingYet.typeList}
+                      with these abilities: ${notSureWhatIamDoingYet.abilitiesList}`
         }else {
           decision = `${notSureWhatIamDoingYet.name} has these types:
                       ${notSureWhatIamDoingYet.typeList} 
-                      and these abilities: ${notSureWhatIamDoingYet.abilitiesList}
+                      with these abilities: ${notSureWhatIamDoingYet.abilitiesList}
                       ${notSureWhatIamDoingYet.reason.join(' and ')}.`
         }
         document.querySelector('h2').innerText = decision
         document.querySelector('img').src = notSureWhatIamDoingYet.image
 
-              // pokeImg.push(data.sprites.other['official-artwork'].front_default)
-              // document.querySelector('#pokeImg1').src = pokeImg[0]
-              // document.querySelector('h3').innerText = data.name
-              //end of code I need to change 
+         
       })
       .catch(err => {
           console.log(`error ${err}`)
@@ -100,6 +98,17 @@ class PokeInfo extends Poke {
       this.locationList = []
       this.locationString = '' 
 
+    }
+
+    encounterInfo(){
+      fetch(this.locationURL)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data)
+        })
+        .catch(err => {
+          console.log(`error ${err}`)
+      });
     }
 }     
       
