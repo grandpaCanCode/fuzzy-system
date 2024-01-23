@@ -2,9 +2,7 @@
 document.querySelector('button').addEventListener('click', getFetch)
 
 function getFetch(){
-  //const poke1 = document.querySelector('#poke1').value.toLowerCase()
- // const url = `https://pokeapi.co/api/v2/pokemon/${poke1}`
- // let pokeImg = []
+
   const choice = document.querySelector('input').value.toLowerCase()
   const url = `https://pokeapi.co/api/v2/pokemon/${choice}`
 
@@ -95,6 +93,15 @@ class Poke {
     }
   }
 }
+class PokeInfo extends Poke {
+    constructor(name, abilities, height, weight, types, image, location){
+      super(name, abilities, height, weight, types, image)
+      this.locationURL = location
+      this.locationList = []
+      this.locationString = '' 
+
+    }
+}     
       
-      
+
       
