@@ -25,7 +25,9 @@ function getFetch(){
           decision = `${notSureWhatIamDoingYet.name} has these types:
                       ${notSureWhatIamDoingYet.typeList} 
                       with these abilities: ${notSureWhatIamDoingYet.abilitiesList}
-                      ${notSureWhatIamDoingYet.reason.join(' and ')}.`
+                      ${notSureWhatIamDoingYet.reason.join(' and ')}
+                      At these location(s):`
+                      notSureWhatIamDoingYet.encounterInfo()
         }
         document.querySelector('h2').innerText = decision
         document.querySelector('img').src = notSureWhatIamDoingYet.image
@@ -108,8 +110,10 @@ class PokeInfo extends Poke {
           for(const item of data){
             this.locationList.push(item.location_area.name)
           }
-            console.log(this.locationList)
-            console.log(this.locationCleanup())
+          let target = document.getElementById('locations')
+          target.innerText = this.locationCleanup(
+
+          )
            
         })
         .catch(err => {
@@ -117,8 +121,14 @@ class PokeInfo extends Poke {
       });
     }
     locationCleanup() {
-      const words = this.locationList.slice(0, 5).join('-').split('-')
-      return words
+      const words = this.locationList.slice(0, 5).join(', ').replaceAll('-', ' ').split(' ')
+      //capitalize the first letter in each word
+      for(let i=0; i <words.length; i++){
+        words[i] = words[i][0].toUpperCase() + words[i].slice(1)
+
+      }
+
+      return words.join(' ')
     }
 }     
 
