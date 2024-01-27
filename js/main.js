@@ -17,14 +17,14 @@ function getFetch(){
         notSureWhatIamDoingYet.getAbilities()
         notSureWhatIamDoingYet.encounterInfo()
         
-        let decision = `${notSureWhatIamDoingYet.name} has these type(s):
-                      ${notSureWhatIamDoingYet.typeList} 
-                      with these abilitie(s): ${notSureWhatIamDoingYet.abilitiesList}
-                      At these location(s):`
-                      notSureWhatIamDoingYet.encounterInfo()
+        let info = `Type(s):${notSureWhatIamDoingYet.typeList} 
+                      Abilities:${notSureWhatIamDoingYet.abilitiesList}
+                      Location(s):`
+                      
+                      
        
-        document.querySelector('h2').innerText = decision
         document.querySelector('img').src = notSureWhatIamDoingYet.image
+        document.querySelector('h2').innerText = info
         document.getElementById('locations').innerText = ''
 
          
@@ -61,15 +61,14 @@ class Poke {
     }
     console.log(this.abilitiesList)
   }
-
   weightToPounds(bacon){
-      return Math.round((bacon/4.536)*100)/100
+    return Math.round((bacon/4.536)*100)/100
   }
-
+  
   heightToFeet(height){
     return Math.round((height/3.048)*100)/100
   }
-
+  
   
 }
 class PokeInfo extends Poke {
@@ -80,35 +79,34 @@ class PokeInfo extends Poke {
       this.locationString = '' 
 
     }
-
+    
     encounterInfo(){
       fetch(this.locationURL)
-        .then(res => res.json())
-        .then(data => {
-          console.log(data)
-          for(const item of data){
-            this.locationList.push(item.location_area.name)
-          }
-          let target = document.getElementById('locations')
-          target.innerText = this.locationCleanup(
-
-          )
-           
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        for(const item of data){
+          this.locationList.push(item.location_area.name)
+        }
+        let target = document.getElementById('locations')
+        target.innerText = this.locationCleanup()
+          
         })
         .catch(err => {
           console.log(`error ${err}`)
-      });
-    }
-    locationCleanup() {
-      const words = this.locationList.slice(0, 5).join(', ').replaceAll('-', ' ').split(' ')
-      //capitalize the first letter in each word
-      for(let i=0; i <words.length; i++){
-        words[i] = words[i][0].toUpperCase() + words[i].slice(1)
-
+        });
       }
-
-      return words.join(' ')
-    }
+      locationCleanup() {
+        const words = this.locationList.slice(0, 5).join(', ').replaceAll('-', ' ').split(' ')
+        //capitalize the first letter in each word
+        for(let i=0; i <words.length; i++){
+          words[i] = words[i][0].toUpperCase() + words[i].slice(1)
+          
+        }
+        
+        return words.join(' ')
+      }
+ 
 }     
 
       
