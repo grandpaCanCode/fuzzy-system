@@ -11,19 +11,20 @@ function getFetch(){
       .then(data => {
         console.log(data)
         //code I need to change
-        const notSureWhatIamDoingYet = new PokeInfo (data.name, data.abilities, data.height, data.weight, data.types, data.sprites.other['official-artwork'].front_default, data.location_area_encounters)
-        notSureWhatIamDoingYet.getTypes()
+        const characterInfo = new PokeInfo (data.name, data.abilities, data.height, data.weight, data.types, data.sprites.other['official-artwork'].front_default, data.location_area_encounters)
+        characterInfo.getTypes()
        
-        notSureWhatIamDoingYet.getAbilities()
-        notSureWhatIamDoingYet.encounterInfo()
+        characterInfo.getAbilities()
+        characterInfo.encounterInfo()
         
-        let info = `Type(s):${notSureWhatIamDoingYet.typeList} 
-                      Abilities:${notSureWhatIamDoingYet.abilitiesList}
-                      Location(s):`
+        let info = `Name: ${characterInfo.name}
+                    Type(s): ${characterInfo.typeList} 
+                    Abilities: ${characterInfo.abilitiesList}
+                    Location(s):`
                       
                       
        
-        document.querySelector('img').src = notSureWhatIamDoingYet.image
+        document.querySelector('img').src = characterInfo.image
         document.querySelector('h2').innerText = info
         document.getElementById('locations').innerText = ''
 
@@ -48,6 +49,13 @@ class Poke {
       this.abilitiesList = []
     }
 
+    getName(){
+      for(const property of this.name) {
+          this.name.push(property.name.name)
+      }
+    console.log(this.name)
+  }
+
   getTypes(){
       for(const property of this.types) {
           this.typeList.push(property.type.name)
@@ -61,15 +69,8 @@ class Poke {
     }
     console.log(this.abilitiesList)
   }
-  weightToPounds(bacon){
-    return Math.round((bacon/4.536)*100)/100
-  }
-  
-  heightToFeet(height){
-    return Math.round((height/3.048)*100)/100
-  }
-  
-  
+
+   
 }
 class PokeInfo extends Poke {
     constructor(name, abilities, height, weight, types, image, location){
