@@ -7,24 +7,14 @@
 /******************************************
 /* LAYOUT
 /*******************************************/
-.container-1{
-  display: flexbox;
-  align-items: flex-start;
-  flex-direction: row;
- 
+.container-main{
+  display:grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
-.container-2{
-  display: flexbox;
-  flex-direction: row;
-}
-.container-3{
-  display: flexbox;
-  flex-direction: row;
-  align-items:flex-end;
 
-}
-ul{
-  list-style: none;
+.container-nav{
+  display:grid;
+  grid-gap: 5px;
 }
 
 
