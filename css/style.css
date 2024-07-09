@@ -7,9 +7,15 @@
 /******************************************
 /* LAYOUT
 /*******************************************/
+nav ul {
+  list-style-type: none;
+}
+
 .container-main{
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr 1fr; */
+  grid-template-columns: repeat(8, 1fr);
+  grid-gap: 5px;
 }
 
 .container-nav{
@@ -17,6 +23,12 @@
   grid-gap: 5px;
 }
 
+.container-inner {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-gap: 5px;
+  background-color: rgb(45, 125, 174);
+}
 
 /******************************************
 /* ADDITIONAL STYLES

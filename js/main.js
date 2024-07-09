@@ -15,7 +15,7 @@ function listOfPoke(){
     .then(data => {
       
        for(let i = 0; i < data.results.length; i++){
-         document.querySelector('h3').innerHTML += data.results[i].name+' '
+         document.querySelector('.container-inner').innerHTML +='<section>'+data.results[i].name+'</section>'
         }
        
       
