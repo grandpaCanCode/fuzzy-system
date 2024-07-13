@@ -3,58 +3,61 @@
 // window.addEventListener('load', ivysaurInfo)
 // window.addEventListener('load', venusaurInfo)
 
+window.addEventListener('load', () => {
+  
+  // let list = ['bulbasaur', 'ivysaur', 'venusaur', 'charmander', 'charmeleon','charizard', 'squirtle', 'wartortle', 'blastoise', 'caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'beedrill', 'pidgey', 'pidgeotto', 'pidgeot', 'rattata', 'raticate']
+  let list = ['charmander', 'charmeleon','charizard', 'squirtle','caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna']
+ 
+    list.forEach((name) => document.querySelector('ul').innerHTML +='<li>'+(name)+'</li>') 
 
-
-window.addEventListener('load', (listOfPoke) => {
-   
-  const link = "https://pokeapi.co/api/v2/pokemon"
-
-  fetch(link)
-    .then(res => res.json()) 
-    .then(data => {
-      
-       for(let i = 0; i < data.results.length; i++){
-         document.querySelector('.container-inner').innerHTML +='<section>'+data.results[i].name+'</section>'
-        }
-       
-        
-    })
 })
-window.addEventListener('load', (bulbasaurInfo) => {
-   
-  const url = "https://pokeapi.co/api/v2/pokemon/bulbasaur"
 
-  fetch(url)
-    .then(res => res.json()) 
-    .then(data => {
+window.addEventListener('load', () =>{
+    let bulbPic = localStorage.getItem('Bulbasaur')
+    let ivyPic =  localStorage.getItem('Ivysaur')
+    let venuPic = localStorage.getItem('Venusaur')
+
+    document.querySelector('#pokePic').src = bulbPic
+    document.querySelector('#ivysaurPic').src = ivyPic
+    document.querySelector('#venusaurPic').src = venuPic
+})
+
+// window.addEventListener('load', () => {
+   
+//   const url = "https://pokeapi.co/api/v2/pokemon/bulbasaur"
+
+//   fetch(url)
+//     .then(res => res.json()) 
+//     .then(data => {
       
        
-        document.querySelector('#pokePic').src = data.sprites.other['official-artwork'].front_default
-        localStorage.setItem('Bulbasaur:', data.sprites.other['official-artwork'].front_default)       
-        console.info(data)
-   })
-})
+//         document.querySelector('#pokePic').src = data.sprites.other['official-artwork'].front_default
+//         localStorage.setItem('Bulbasaur', data.sprites.other['official-artwork'].front_default)       
+//         console.info(data)
+//    })
+// })
 // function ivysaurInfo(){
    
-//   const link = "https://pokeapi.co/api/v2/pokemon/ivysaur"
+//   const ivylink = "https://pokeapi.co/api/v2/pokemon/ivysaur"
 
-//   fetch(link)
+//   fetch(ivylink)
 //     .then(res => res.json()) 
 //     .then(data => {
       
 //         document.querySelector('#ivysaurPic').src = data.sprites.other['official-artwork'].front_default
+//         localStorage.setItem('Ivysaur', data.sprites.other['official-artwork'].front_default)
 //         console.log(data)
 // })
 // }
 // function venusaurInfo(){
    
-//   const link = "https://pokeapi.co/api/v2/pokemon/venusaur"
+//   const venulink = "https://pokeapi.co/api/v2/pokemon/venusaur"
 
-//   fetch(link)
+//   fetch(venulink)
 //     .then(res => res.json()) 
 //     .then(data => {
-      
 //         document.querySelector('#venusaurPic').src = data.sprites.other['official-artwork'].front_default
+//          localStorage.setItem('Venusaur', data.sprites.other['official-artwork'].front_default)
 //         console.log(data)
 // })
 // }
