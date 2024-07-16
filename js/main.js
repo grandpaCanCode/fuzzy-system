@@ -58,22 +58,33 @@ document.querySelector('#venusaurPic').src = venuPic
             //         console.log(data)
             // })
             // }
+    
             
             
-document.querySelector('button').addEventListener('click', getFetch)
-function getFetch(){
-  
-  const choice = document.querySelector('input').value.toLowerCase()
+            form = document.querySelector('form')
+            
+            
+           
+         
+addEventListener('submit', function(e){
+  e.preventDefault();
+  var elements = this.elements
+  var choice = form.elements.search.value.toLowerCase()
   const url = `https://pokeapi.co/api/v2/pokemon/${choice}`
   
   fetch(url)
   .then(res => res.json()) 
   .then(data => {
     console.log(data)
-
-    
+  
     document.querySelector('#inputPic').src = data.sprites.other['official-artwork'].front_default    
     document.querySelector('h3').innerText = data.name
+    for(let i = 0; i < data.moves.length; i++){
+     document.querySelector('p').innerHTML += data.moves[i].move['name']+', '
+
+    }
+    
+
       
 
          
@@ -81,7 +92,7 @@ function getFetch(){
       .catch(err => {
           console.log(`error ${err}`)
       });
-}
+})
         
 
   
