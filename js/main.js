@@ -26,10 +26,26 @@ document.querySelector('#venusaurPic').src = venuPic
     
     document.querySelector('#inputPic').src = data.sprites.other['official-artwork'].front_default    
     document.querySelector('h3').innerText = data.name
-    document.querySelector('h5').innerText = 'moves:'
+    document.querySelector('.abilitiesHeader').innerText = 'abilities:'
+    document.querySelector('.typesHeader').innerText = 'types:'
+
     
-    for(let i = 0; i < data.moves.length; i++){
-      document.querySelector('p').innerHTML += data.moves[i].move['name']+', '
+    for(let i = 0; i < data.abilities.length; i++){
+      // document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
+      data.abilities.length === 1? 
+      document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
+      document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
+      if (data.abilities.length-1){
+        document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name'] 
+        }
+    }
+    for(let i = 0; i < data.types.length; i++){
+      data.types.length === 1? 
+      document.querySelector('.typesPara').innerHTML += data.types[i].type['name'] :
+      document.querySelector('.typesPara').innerHTML += data.types[i].type['name']+', '
+      if (data.types.length-1){
+      document.querySelector('.typesPara').innerHTML += data.types[i].type['name'] 
+      }
       
     }
     
