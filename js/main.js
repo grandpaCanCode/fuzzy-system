@@ -25,7 +25,7 @@ list.forEach((name) => document.querySelector('ul').innerHTML +='<li><a href="">
     console.log(data)
     
     document.querySelector('#inputPic').src =  data.sprites.other['official-artwork'].front_default   
-    document.querySelector('h3').innerText = data.name
+    document.querySelector('#inputPicName').innerText = data.name
     document.querySelector('.abilitiesHeader').innerText = 'abilities:'
     document.querySelector('.typesHeader').innerText = 'types:'
 
@@ -73,16 +73,24 @@ addEventListener('submit', function(e){
   .then(data => {
     console.log(data)
     
-    document.querySelector('#inputPic').src = data.sprites.other['official-artwork'].front_default    
+    document.querySelector('#pokePic').src = data.sprites.other['official-artwork'].front_default    
     document.querySelector('h3').innerText = data.name
-    document.querySelector('h5').innerText = 'moves:'
+    document.querySelector('h5').innerText = 'abilities:'
     
     for(let i = 0; i < data.moves.length; i++){
       document.querySelector('p').innerHTML += data.moves[i].move['name']+', '
       
     }
     
-    
+    for(let i = 0; i < data.abilities.length; i++){
+      // document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
+      data.abilities.length === 1? 
+      document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
+      document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
+      if (data.abilities.length-1){
+        document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name'] 
+        }
+    }
     
     
     
