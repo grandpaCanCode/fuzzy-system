@@ -2,14 +2,6 @@
 /* CSS
 /*******************************************/
 
-
-
-/******************************************
-/* LAYOUT
-/*******************************************/
-body {
-  background-color: #C3B0A0;
-}
 nav ul {
   list-style-type: none;
   margin-top: 5px;
@@ -17,7 +9,7 @@ nav ul {
 nav li{
   padding: 10px;
   text-decoration: none;
-  background-color: #4281c0;
+  background-color: rgba(45, 125, 174, 0.425);
   border: 5px solid #17416B;
   box-shadow: 5px 5px 5px #828282;
 }
@@ -25,22 +17,15 @@ a{
   color: inherit;
   text-decoration: none;
 }
-/* li {
-  background-color: #4281c0;
-  border: 5px solid #17416B;
-} */
 
-#colorBlue{
-  background-color: rgb(45, 125, 174);
-}
 .item-type-a {
   padding-top: 10%;
-  background-color: #DFC230;
+  background-color: rgba(71, 71, 71, 0.7);
+  padding-left: 10%;
 }
-.item-type-b{
-  padding-top: 10%;
-  background-color: #F1EBE4;
-}
+
+
+
 .container-main{
   display:grid;
   grid-template-columns: repeat(2, 1fr);
@@ -205,6 +190,7 @@ button, input {
     body {
        width: 100%;
        margin: 0 auto; 
+       position: fixed;
     }
     .search-bar {
       margin: auto auto auto 50%;
@@ -218,5 +204,46 @@ button, input {
     nav li {
       margin-bottom: 2%;
     }
-  
+  }
+/******************************************
+/* Experiment
+/*******************************************/
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1a1a1a;
+  color: white;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+#speedlineCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+#controls {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+
+#currentSettings {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  border-radius: 5px;
+  font-family: monospace;
+  white-space: pre-wrap;
+}
+input {
+display: flex;
 }
