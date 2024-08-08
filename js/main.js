@@ -2,7 +2,7 @@
 let bulbPic = localStorage.getItem('Bulbasaur')
 let ivyPic =  localStorage.getItem('Ivysaur')
 let venuPic = localStorage.getItem('Venusaur')
-let list = ['charmander', 'charmeleon','charizard', 'squirtle','caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna']
+let list = ['charmander', 'charmeleon','charizard', 'squirtle','caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'mamoswine', 'phanpy', 'ivysaur']
 
 list.forEach((name) => document.querySelector('ul').innerHTML +='<li><a href="">'+(name)+'</a></li>') 
 
@@ -24,27 +24,27 @@ list.forEach((name) => document.querySelector('ul').innerHTML +='<li><a href="">
   .then(data => {
     console.log(data)
     
-    document.querySelector('#inputPic').src =  data.sprites.other['official-artwork'].front_default   
-    document.querySelector('#inputPicName').innerText = data.name
-    document.querySelector('.abilitiesHeader').innerText = 'abilities:'
-    document.querySelector('.typesHeader').innerText = 'types:'
+    document.querySelector('#staticNamePic').src =  data.sprites.other['official-artwork'].front_default   
+    document.querySelector('#staticName').innerText = data.name
+    document.querySelector('#abilitiesHeader').innerText = 'abilities:'
+    document.querySelector('#typesHeader').innerText = 'types:'
 
     
     for(let i = 0; i < data.abilities.length; i++){
       // document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
       data.abilities.length === 1? 
-      document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
-      document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
+      document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
+      document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
       if (data.abilities.length-1){
-        document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name'] 
+        document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] 
         }
     }
     for(let i = 0; i < data.types.length; i++){
       data.types.length === 1? 
-      document.querySelector('.typesPara').innerHTML += data.types[i].type['name'] :
-      document.querySelector('.typesPara').innerHTML += data.types[i].type['name']+', '
+      document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] :
+      document.querySelector('#typesPara').innerHTML += data.types[i].type['name']+', '
       if (data.types.length-1){
-      document.querySelector('.typesPara').innerHTML += data.types[i].type['name'] 
+      document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] 
       }
       
     }
@@ -73,26 +73,35 @@ addEventListener('submit', function(e){
   .then(data => {
     console.log(data)
     
-    document.querySelector('#pokePic').src = data.sprites.other['official-artwork'].front_default    
-    document.querySelector('h3').innerText = data.name
-    document.querySelector('h5').innerText = 'abilities:'
+    document.querySelector('#inputPic').src = data.sprites.other['official-artwork'].front_default    
+    document.querySelector('#inputName').innerText = data.name
+    document.querySelector('#inputAbilitiesHeader').innerText = 'abilities:'
+    document.querySelector('#inputTypesHeader').innerText = 'types:'
     
-    for(let i = 0; i < data.moves.length; i++){
-      document.querySelector('p').innerHTML += data.moves[i].move['name']+', '
+    // for(let i = 0; i < data.moves.length; i++){
+    //   document.querySelector('p').innerHTML += data.moves[i].move['name']+', '
       
-    }
+    // }
     
     for(let i = 0; i < data.abilities.length; i++){
       // document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
       data.abilities.length === 1? 
-      document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
-      document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
+      document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name'] :
+      document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
       if (data.abilities.length-1){
-        document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name'] 
+        document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name'] 
         }
     }
     
-    
+    for(let i = 0; i < data.types.length; i++){
+        data.types.length === 1? 
+        document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name'] :
+        document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name']+', '
+        if (data.types.length-1){
+        document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name'] 
+        }
+        
+      }
     
     
   })
@@ -370,30 +379,30 @@ function initializeSpeedlines() {
   }
 
 function setupEventListeners(speedlines, initialSettings) {
-    const updateSettings = () => {
-        const newSettings = Object.fromEntries(
-            ['type', 'count', 'speed', 'length', 'color', 'initialSize', 'middleSize', 'endSize', 'emitterRadius', 'angle', 'emitterX', 'emitterY']
-            .map(id => [id, document.getElementById(id).value])
-        );
-        speedlines.updateSettings(newSettings);
-        document.getElementById('currentSettings').textContent = JSON.stringify(newSettings, null, 2);
-    };
+    // const updateSettings = () => {
+    //     const newSettings = Object.fromEntries(
+    //         ['type', 'count', 'speed', 'length', 'color', 'initialSize', 'middleSize', 'endSize', 'emitterRadius', 'angle', 'emitterX', 'emitterY']
+    //         .map(id => [id, document.getElementById(id).value])
+    //     );
+    //     speedlines.updateSettings(newSettings);
+    //     document.getElementById('currentSettings').textContent = JSON.stringify(newSettings, null, 2);
+    // };
 
-    const updateForms = (settings) => {
-        Object.entries(settings).forEach(([key, value]) => {
-            const element = document.getElementById(key);
-            if (element) element.value = value;
-        });
-    };
+    // const updateForms = (settings) => {
+    //     Object.entries(settings).forEach(([key, value]) => {
+    //         const element = document.getElementById(key);
+    //         if (element) element.value = value;
+    //     });
+    // };
 
-    document.querySelectorAll('#controls input, #controls select').forEach(control => 
-        control.addEventListener('input', updateSettings)
-    );
+    // document.querySelectorAll('#controls input, #controls select').forEach(control => 
+    //     control.addEventListener('input', updateSettings)
+    // );
 
     window.addEventListener('resize', () => speedlines.resize(window.innerWidth, window.innerHeight));
 
-    updateForms(initialSettings);
-    updateSettings();
+    // updateForms(initialSettings);
+    // updateSettings();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
