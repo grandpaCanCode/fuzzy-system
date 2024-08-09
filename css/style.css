@@ -162,6 +162,9 @@ button, input {
 
 
 @media screen and (min-width: 900px){
+  #controls img {
+    padding-left: 40%;
+  }
   nav li {
     display: inline-block;
     margin-left: 60px;
