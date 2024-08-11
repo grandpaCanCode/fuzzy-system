@@ -35,17 +35,12 @@ list.forEach((name) => document.querySelector('ul').innerHTML +='<li><a href="">
       data.abilities.length === 1? 
       document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
       document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
-      if (data.abilities.length-1){
-        document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] 
-        }
+     
     }
     for(let i = 0; i < data.types.length; i++){
       data.types.length === 1? 
       document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] :
       document.querySelector('#typesPara').innerHTML += data.types[i].type['name']+', '
-      if (data.types.length-1){
-      document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] 
-      }
       
     }
     
@@ -88,19 +83,12 @@ addEventListener('submit', function(e){
       data.abilities.length === 1? 
       document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name'] :
       document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
-      if (data.abilities.length-1){
-        document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name'] 
-        }
     }
     
     for(let i = 0; i < data.types.length; i++){
         data.types.length === 1? 
         document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name'] :
         document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name']+', '
-        if (data.types.length-1){
-        document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name'] 
-        }
-        
       }
     
     
