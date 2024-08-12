@@ -3,9 +3,10 @@
 /*******************************************/
 
 .skeleton {
- 
   visibility: visible;
+  padding-top: 30%;
   background-color: #b6e72e;
+  text-align: center;
   animation: skeleton-loading  1s linear infinite alternate;
 }
 
