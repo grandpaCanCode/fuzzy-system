@@ -1,16 +1,24 @@
 
-let bulbPic = localStorage.getItem('Bulbasaur')
-let ivyPic =  localStorage.getItem('Ivysaur')
-let venuPic = localStorage.getItem('Venusaur')
+const skeleton =  document.querySelector('.skeleton')
+
+    document.onreadystatechange = () => {
+
+        if (document.readyState === "loading"){
+             document.body.style = "background-color: #b6e72e"
+          
+            
+            initLoader();
+        }
+        if (document.readyState === "complete"){
+
+            skeleton.remove()
+        }
+    }
+
+
 let list = ['charmander', 'charmeleon','charizard', 'squirtle','caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'mamoswine', 'phanpy', 'ivysaur']
 
 list.forEach((name) => document.querySelector('ul').innerHTML +='<li><a href="">'+(name)+'</a></li>') 
-
-// document.querySelector('#pokePic').src = bulbPic
-// document.querySelector('#ivysaurPic').src = ivyPic
-// document.querySelector('#venusaurPic').src = venuPic
-
-
 
  document.querySelector('nav').addEventListener('click', function(e){
     e.preventDefault()

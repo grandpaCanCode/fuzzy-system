@@ -2,6 +2,17 @@
 /* CSS
 /*******************************************/
 
+.skeleton {
+ 
+  visibility: visible;
+  background-color: #b6e72e;
+  animation: skeleton-loading  1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {background-color: #b6e72e}
+  100% {background-color: #4b3d3d;}
+}
 .container-nav{
   display:grid;
   grid-gap: 10px;
