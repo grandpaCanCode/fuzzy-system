@@ -1,68 +1,100 @@
-
+//page loader
 const skeleton =  document.querySelector('.skeleton')
 
 document.addEventListener("readystatechange", (event) => {
         if (event.target.readyState === "loading") {
-            document.body.style = "background-color: #b6e72e"
-          initLoader();
+          
         } else if (event.target.readyState === "complete") {
             skeleton.remove()
         }
 });
-      
+//static bullets     
 let list = ['charmander', 'charmeleon','charizard', 'squirtle','caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'mamoswine', 'phanpy', 'ivysaur']
 
 list.forEach((name) => document.querySelector('ul').innerHTML +='<li><a href="">'+(name)+'</a></li>') 
 
  document.querySelector('nav').addEventListener('click', function(e){
-    e.preventDefault()
-    let target = e.target
-    let name = target.textContent
-  console.log(name)
-  const link = `https://pokeapi.co/api/v2/pokemon/${name}`
-  
-  fetch(link)
-  .then(res => res.json()) 
-  .then(data => {
-    console.log(data)
-    
-    document.querySelector('#staticNamePic').src =  data.sprites.other['official-artwork'].front_default   
-    document.querySelector('#staticName').innerText = data.name
-    document.querySelector('#abilitiesHeader').innerText = 'abilities:'
-    document.querySelector('#typesHeader').innerText = 'types:'
-
-    
-    for(let i = 0; i < data.abilities.length; i++){
-      // document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
-      data.abilities.length === 1? 
-      document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
-      document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
-     
-    }
-    for(let i = 0; i < data.types.length; i++){
-      data.types.length === 1? 
-      document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] :
-      document.querySelector('#typesPara').innerHTML += data.types[i].type['name']+', '
-      
-    }
-    
-    
-    
-    
-    
-    
-  })
-  .catch(err => {
-    console.log(`error ${err}`)
-  });
+     e.preventDefault()
+     let target = e.target
+     let name = target.textContent
+     document.querySelector('#abilitiesPara').innerText = ' '
+     document.querySelector('#typesPara').innerText = ' '
+     console.log(name)
+     const url = `https://pokeapi.co/api/v2/pokemon/${name}`
+     getData(url)
 })
+async function getData(url) {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      document.querySelector('#staticNamePic').src =  data.sprites.other['official-artwork'].front_default   
+      document.querySelector('#staticName').innerText = data.name
+      document.querySelector('#abilitiesHeader').innerText = 'abilities:'
+      document.querySelector('#typesHeader').innerText = 'types:'
+  
 
+      for(let i = 0; i < data.abilities.length; i++){
+        data.abilities.length === 1? 
+        document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
+        document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name']+' '
+       
+      }
+      for(let i = 0; i < data.types.length; i++){
+
+        data.types.length === 1? 
+        document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] :
+        document.querySelector('#typesPara').innerHTML += data.types[i].type['name']+' '
+        
+      }
+      console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+     
+  }
+  
+//   fetch(link)
+//   .then(res => res.json()) 
+//   .then(data => {
+//     console.log(data)
+    
+//     document.querySelector('#staticNamePic').src =  data.sprites.other['official-artwork'].front_default   
+//     document.querySelector('#staticName').innerText = data.name
+//     document.querySelector('#abilitiesHeader').innerText = 'abilities:'
+//     document.querySelector('#typesHeader').innerText = 'types:'
+
+    
+//     for(let i = 0; i < data.abilities.length; i++){
+//       data.abilities.length === 1? 
+//       document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
+//       document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name']+' '
+     
+//     }
+//     for(let i = 0; i < data.types.length; i++){
+//       data.types.length === 1? 
+//       document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] :
+//       document.querySelector('#typesPara').innerHTML += data.types[i].type['name']+' '
+      
+//     }
+    
+//   })
+//   .catch(err => {
+//     console.log(`error ${err}`)
+//   });
+
+//search
 form = document.querySelector('form')
 
 addEventListener('submit', function(e){
   e.preventDefault();
   var elements = this.elements
   var choice = form.elements.search.value.toLowerCase()
+  document.querySelector('#inputAbilitiesPara').innerText = ' '
+  document.querySelector('#inputTypesPara').innerText = ' '
   const url = `https://pokeapi.co/api/v2/pokemon/${choice}`
   
   fetch(url)
@@ -81,16 +113,15 @@ addEventListener('submit', function(e){
     // }
     
     for(let i = 0; i < data.abilities.length; i++){
-      // document.querySelector('.abilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
       data.abilities.length === 1? 
       document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name'] :
-      document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name']+', '
+      document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name']+' '
     }
     
     for(let i = 0; i < data.types.length; i++){
         data.types.length === 1? 
         document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name'] :
-        document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name']+', '
+        document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name']+' '
       }
     
     
@@ -100,8 +131,7 @@ addEventListener('submit', function(e){
   });
 })
 
-// Experiment Zone
-// Utility functions
+// canvas 
 const randomFactor = () => 0.5 + Math.random() * 0.5;
 const radToDeg = (rad) => (rad * 180) / Math.PI;
 const degToRad = (deg) => (deg * Math.PI) / 180;
@@ -340,7 +370,6 @@ class AnimeSpeedlines {
     }
 }
 
-// Setup and event handling
 function initializeSpeedlines() {
     const canvas = document.getElementById('speedlineCanvas');
     canvas.width = window.innerWidth;
