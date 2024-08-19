@@ -1,135 +1,3 @@
-//page loader
-const skeleton =  document.querySelector('.skeleton')
-
-document.addEventListener("readystatechange", (event) => {
-        if (event.target.readyState === "loading") {
-          
-        } else if (event.target.readyState === "complete") {
-            skeleton.remove()
-        }
-});
-//static bullets     
-let list = ['charmander', 'charmeleon','charizard', 'squirtle','caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'mamoswine', 'phanpy', 'ivysaur']
-
-list.forEach((name) => document.querySelector('ul').innerHTML +='<li><a href="">'+(name)+'</a></li>') 
-
- document.querySelector('nav').addEventListener('click', function(e){
-     e.preventDefault()
-     let target = e.target
-     let name = target.textContent
-     document.querySelector('#abilitiesPara').innerText = ' '
-     document.querySelector('#typesPara').innerText = ' '
-     console.log(name)
-     const url = `https://pokeapi.co/api/v2/pokemon/${name}`
-     getData(url)
-})
-async function getData(url) {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-  
-      const data = await response.json();
-      document.querySelector('#staticNamePic').src =  data.sprites.other['official-artwork'].front_default   
-      document.querySelector('#staticName').innerText = data.name
-      document.querySelector('#abilitiesHeader').innerText = 'abilities:'
-      document.querySelector('#typesHeader').innerText = 'types:'
-  
-
-      for(let i = 0; i < data.abilities.length; i++){
-        data.abilities.length === 1? 
-        document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
-        document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name']+' '
-       
-      }
-      for(let i = 0; i < data.types.length; i++){
-
-        data.types.length === 1? 
-        document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] :
-        document.querySelector('#typesPara').innerHTML += data.types[i].type['name']+' '
-        
-      }
-      console.log(data);
-    } catch (error) {
-        console.error(error.message);
-    }
-     
-  }
-  
-//   fetch(link)
-//   .then(res => res.json()) 
-//   .then(data => {
-//     console.log(data)
-    
-//     document.querySelector('#staticNamePic').src =  data.sprites.other['official-artwork'].front_default   
-//     document.querySelector('#staticName').innerText = data.name
-//     document.querySelector('#abilitiesHeader').innerText = 'abilities:'
-//     document.querySelector('#typesHeader').innerText = 'types:'
-
-    
-//     for(let i = 0; i < data.abilities.length; i++){
-//       data.abilities.length === 1? 
-//       document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
-//       document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name']+' '
-     
-//     }
-//     for(let i = 0; i < data.types.length; i++){
-//       data.types.length === 1? 
-//       document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] :
-//       document.querySelector('#typesPara').innerHTML += data.types[i].type['name']+' '
-      
-//     }
-    
-//   })
-//   .catch(err => {
-//     console.log(`error ${err}`)
-//   });
-
-//search
-form = document.querySelector('form')
-
-addEventListener('submit', function(e){
-  e.preventDefault();
-  var elements = this.elements
-  var choice = form.elements.search.value.toLowerCase()
-  document.querySelector('#inputAbilitiesPara').innerText = ' '
-  document.querySelector('#inputTypesPara').innerText = ' '
-  const url = `https://pokeapi.co/api/v2/pokemon/${choice}`
-  
-  fetch(url)
-  .then(res => res.json()) 
-  .then(data => {
-    console.log(data)
-    
-    document.querySelector('#inputPic').src = data.sprites.other['official-artwork'].front_default    
-    document.querySelector('#inputName').innerText = data.name
-    document.querySelector('#inputAbilitiesHeader').innerText = 'abilities:'
-    document.querySelector('#inputTypesHeader').innerText = 'types:'
-    
-    // for(let i = 0; i < data.moves.length; i++){
-    //   document.querySelector('p').innerHTML += data.moves[i].move['name']+', '
-      
-    // }
-    
-    for(let i = 0; i < data.abilities.length; i++){
-      data.abilities.length === 1? 
-      document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name'] :
-      document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name']+' '
-    }
-    
-    for(let i = 0; i < data.types.length; i++){
-        data.types.length === 1? 
-        document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name'] :
-        document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name']+' '
-      }
-    
-    
-  })
-  .catch(err => {
-    console.log(`error ${err}`)
-  });
-})
 
 // canvas 
 const randomFactor = () => 0.5 + Math.random() * 0.5;
@@ -183,7 +51,7 @@ class Vector2 {
     setMag(len) {
         return this.normalize().mult(len);
     }
-
+    
     copy() {
         return new Vector2(this.x, this.y);
     }
@@ -261,12 +129,12 @@ class Line {
         const endPos = type === 'radial'
             ? this.pos.copy().add(this.pos.copy().sub(emitterPos).setMag(this.length))
             : this.pos.copy().sub(this.vel.copy().setMag(this.length));
+            
+            const midPos = this.pos.copy().add(endPos).div(2);
+            const perpAngle = Math.atan2(endPos.y - this.pos.y, endPos.x - this.pos.x) + Math.PI / 2;
+            const perpVector = Vector2.fromAngle(perpAngle);
 
-        const midPos = this.pos.copy().add(endPos).div(2);
-        const perpAngle = Math.atan2(endPos.y - this.pos.y, endPos.x - this.pos.x) + Math.PI / 2;
-        const perpVector = Vector2.fromAngle(perpAngle);
-
-        ctx.fillStyle = color;
+            ctx.fillStyle = color;
 
         // Draw positive half
         ctx.beginPath();
@@ -278,11 +146,11 @@ class Line {
         this.drawHalfLine(ctx, this.pos, midPos, endPos, perpVector, -1);
         ctx.fill();
     }
-
+    
     drawHalfLine(ctx, startPos, midPos, endPos, perpVector, sign) {
         const shift = 0.5; // Adjust this value to control the overlap
         const shiftVector = perpVector.copy().mult(shift * sign);
-
+        
         ctx.moveTo(
             startPos.x + perpVector.x * this.sizes[0] * sign / 2 - shiftVector.x,
             startPos.y + perpVector.y * this.sizes[0] * sign / 2 - shiftVector.y
@@ -374,7 +242,7 @@ function initializeSpeedlines() {
     const canvas = document.getElementById('speedlineCanvas');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
+    
     const initialSettings = {
         type: "linear",
         count: 30,
@@ -397,11 +265,11 @@ function initializeSpeedlines() {
     return { speedlines};
   }
 
-function setupEventListeners(speedlines, initialSettings) {
+  function setupEventListeners(speedlines, initialSettings) {
     // const updateSettings = () => {
-    //     const newSettings = Object.fromEntries(
-    //         ['type', 'count', 'speed', 'length', 'color', 'initialSize', 'middleSize', 'endSize', 'emitterRadius', 'angle', 'emitterX', 'emitterY']
-    //         .map(id => [id, document.getElementById(id).value])
+        //     const newSettings = Object.fromEntries(
+            //         ['type', 'count', 'speed', 'length', 'color', 'initialSize', 'middleSize', 'endSize', 'emitterRadius', 'angle', 'emitterX', 'emitterY']
+            //         .map(id => [id, document.getElementById(id).value])
     //     );
     //     speedlines.updateSettings(newSettings);
     //     document.getElementById('currentSettings').textContent = JSON.stringify(newSettings, null, 2);
@@ -428,3 +296,104 @@ document.addEventListener('DOMContentLoaded', () => {
     const { speedlines, initialSettings } = initializeSpeedlines();
     setupEventListeners(speedlines, initialSettings);
 });
+//page loader
+const skeleton =  document.querySelector('.skeleton')
+
+document.addEventListener("readystatechange", (event) => {
+        if (event.target.readyState === "loading") {
+          
+        } else if (event.target.readyState === "complete") {
+            skeleton.remove()
+            let list = ['charmander', 'charmeleon','charizard', 'squirtle','caterpie', 'metapod', 'butterfree', 'weedle', 'kakuna', 'mamoswine', 'phanpy', 'ivysaur']
+            list.forEach((name) => document.querySelector('ul').innerHTML +='<li><a href="">'+(name)+'</a></li>') 
+        }
+});
+//static bullets     
+    
+     document.querySelector('nav').addEventListener('click', function(e){
+         e.preventDefault()
+         let target = e.target
+         let name = target.textContent
+         document.querySelector('#abilitiesPara').innerText = ' '
+         document.querySelector('#typesPara').innerText = ' '
+         console.log(name)
+         const url = `https://pokeapi.co/api/v2/pokemon/${name}`
+         getData(url)
+    })
+    async function getData(url) {
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+          }
+      
+          const data = await response.json();
+          document.querySelector('#staticNamePic').src =  data.sprites.other['official-artwork'].front_default   
+          document.querySelector('#staticName').innerText = data.name
+          document.querySelector('#abilitiesHeader').innerText = 'abilities:'
+          document.querySelector('#typesHeader').innerText = 'types:'
+      
+    
+          for(let i = 0; i < data.abilities.length; i++){
+            data.abilities.length === 1? 
+            document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name'] :
+            document.querySelector('#abilitiesPara').innerHTML += data.abilities[i].ability['name']+' '
+           
+          }
+          for(let i = 0; i < data.types.length; i++){
+            data.types.length === 1? 
+            document.querySelector('#typesPara').innerHTML += data.types[i].type['name'] :
+            document.querySelector('#typesPara').innerHTML += data.types[i].type['name']+' '
+            
+          }
+          console.log(data);
+        } catch (error) {
+            console.error(error.message);
+        }
+         
+      }
+      
+    
+    form = document.querySelector('form')
+    
+    addEventListener('submit', function(e){
+      e.preventDefault();
+      var elements = this.elements
+      var search = form.elements.search.value.toLowerCase()
+      document.querySelector('#inputAbilitiesPara').innerText = ' '
+      document.querySelector('#inputTypesPara').innerText = ' '
+      const urlSearch = `https://pokeapi.co/api/v2/pokemon/${search}`
+      getSearchData(urlSearch)
+    })
+    async function getSearchData (urlSearch){
+
+        try {
+            const response = await fetch(urlSearch);
+            if (!response.ok) {
+              throw new Error(`Response status: ${response.status}`);
+            }
+        const data = await response.json();
+        document.querySelector('#inputPic').src = data.sprites.other['official-artwork'].front_default    
+        document.querySelector('#inputName').innerText = data.name
+        document.querySelector('#inputAbilitiesHeader').innerText = 'abilities:'
+        document.querySelector('#inputTypesHeader').innerText = 'types:'
+        
+        
+        for(let i = 0; i < data.abilities.length; i++){
+            data.abilities.length === 1? 
+            document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name'] :
+            document.querySelector('#inputAbilitiesPara').innerHTML += data.abilities[i].ability['name']+' '
+        }
+        
+        for(let i = 0; i < data.types.length; i++){
+            data.types.length === 1? 
+            document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name'] :
+            document.querySelector('#inputTypesPara').innerHTML += data.types[i].type['name']+' '
+        }
+        
+        
+        console.log(data);
+    } catch (error) {
+        console.error(error.message);
+    }
+}  
