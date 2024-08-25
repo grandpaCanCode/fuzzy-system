@@ -228,7 +228,7 @@ body {
 #controls {
   position: fixed;
   top: 10px;
-  /* left: 5%; */
+  left: 5%; 
   background-color: rgba(0, 0, 0, 0.7);
   border-radius: 5px;
   max-height: 90vh;
