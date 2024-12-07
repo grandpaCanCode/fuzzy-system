@@ -1,5 +1,6 @@
 
-<h2>Pokemon App<br><small>powered by <a href="https://pokeapi.co/">pokeapi</a></small></h2>
+<h2>Pokemon App<br></h2>
+<small>powered by <a href="https://pokeapi.co/">pokeapi</a></small>
 <p>JS interface that accesses a database of thousands of Pokemon-related objects. Based on user input JSON is requested and manipulated then dynamically rendered in the UI.</p> 
 <img src="https://github.com/user-attachments/assets/012e7251-a485-4372-8ba3-32b94c030caf" alt="pic of app">
 
